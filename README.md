@@ -10,15 +10,13 @@ ansible, ansible-playbook cluster using 3D printed structure.
 
 ---
 
-## What is does
+## What this does
 
 - Update the system.
 - Add your SSH key.
 - Install packages you normally use.
-
-### Network diagram:
-
-<div style="text-align:center"><img src="./docs/images/network_diagram.png" width="300"/></div>
+- Install Docker
+- Setup Kubernetes cluster.
 
 ---
 
@@ -26,10 +24,14 @@ ansible, ansible-playbook cluster using 3D printed structure.
 
 ### Requirements
 
-- Ansible, Nmap
+In order to use ansible and follow the steps on this short guide you need to setup the boards, install the following requirements, download this repository and create an SSH key file.
+
+- Setup the boards (Follow this [guide](./docs/boards_setup.md))
+
+- Install requirements.
 
   ```shell
-  sudo apt install python3 python3-pip nmap -y
+  sudo apt install python3 python3-pip python3-setuptools nmap -y
   pip3 install ansible
   ```
 
@@ -39,28 +41,11 @@ ansible, ansible-playbook cluster using 3D printed structure.
   git clone https://github.com/yeyeto2788/ansible-playcluster.git
   ```
 
-- Create an SSH key file.
-
-```shell
-ssh-keygen -t ed25519 -c "ansible workstation key"
-```
-
-### SBC preparation
-
-- Burn the image on the SD card ([More Info](https://www.raspberrypi.org/documentation/installation/installing-images/))
-- Connect the switch to the network and the boards to the switch.
-- Power up the boards and the switch. :electric_plug:
-- Find the IP assigned to the boards. :mag:
+- Create an SSH key file. :key:
 
   ```shell
-  nmap -sT 192.168.0.1/24
+  ssh-keygen -t ed25519 -c "ansible workstation key"
   ```
-
-- Log in through SSH to each board and change the hostname of each machine. e.g: `ssh root@192.168.0.110`.
-- Change hostname (Optional)
-- Assign an static IP address to each board.
-
-### Getting the boards ready
 
 - Get needed roles for this playbook.
 
@@ -110,7 +95,7 @@ ssh-keygen -t ed25519 -c "ansible workstation key"
 
 ---
 
-## Hardware :hammer:
+## Hardware used :hammer:
 
 The following items are the ones I used for this build. For more info on the hardware you head to [this](./docs/hardware.md) document.
 
