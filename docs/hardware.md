@@ -61,7 +61,7 @@ To replicate the cluster I have built you need the following pieces.
 
 **Notes:**
 
-- 1 Frame per board (You add an additional frame for the top)
+- 1 Frame per board (You can add an additional frame for the top)
 - 4 PCB Standoff per board
 - 4 Frame Standoff per frame
 - 2 Board Holder per board.
