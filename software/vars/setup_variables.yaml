@@ -1,0 +1,19 @@
+---
+# User to be created
+ssh_user: yeyeto2788
+# Local user to look for the ssh key file.
+# I'm using the same user as I created on all my machines.
+local_user: "{{ ssh_user }}"
+# Where is the SSH file key located.
+ssh_key_directory: "/home/{{ local_user}}/.ssh/id_rsa.pub"
+# Whether to install or not docker-compose.
+install_docker_compose: false
+# Version of docker compose to be installed.
+docker_compose_version: "1.27.4"
+# Packages to be installed on all machines.
+packages_to_install:
+  - python3
+  - python3-pip
+  - python3-setuptools
+# Whether to install or not k3s
+install_k3s: true
