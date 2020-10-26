@@ -6,6 +6,20 @@
     - ./vars/setup_variables.yaml
 
   pre_tasks:
+    - name: Create user
+      user:
+        name: '{{ ssh_user }}'
+        state: present
+        shell: /bin/bash
+        expires: -1
+        groups: sudo
+
+    - name: Give sudo access to the user created
+      copy:
+        dest: '/etc/sudoers.d/{{ ssh_user }}'
+        content: '{{ ssh_user }} ALL=(ALL) NOPASSWD: ALL'
+        validate: /usr/sbin/visudo -cf %s
+
     - name: Update the system packages
       apt:
         update_cache: true
