@@ -31,7 +31,7 @@ In order to use ansible and follow the steps on this short guide you need to set
 - Install requirements.
 
   ```shell
-  sudo apt install python3 python3-pip python3-setuptools nmap -y
+  sudo apt install python3 python3-pip python3-setuptools nmap sshpass -y
   pip3 install ansible
   ```
 
