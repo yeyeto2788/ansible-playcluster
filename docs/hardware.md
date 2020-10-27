@@ -57,7 +57,7 @@ To replicate the cluster I have built you need the following pieces.
 
 - 0.25 Layer height.
 - 4 Walls.
-- 20% Infill.
+- 50% Infill.
 
 **Notes:**
 
