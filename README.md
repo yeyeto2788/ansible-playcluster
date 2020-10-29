@@ -40,25 +40,31 @@ In order to use ansible and follow the steps on this short guide you need to set
 - Clone this repository. :dancers:
 
   ```shell
-  git clone https://github.com/yeyeto2788/ansible-playcluster.git
+  $ git clone https://github.com/yeyeto2788/ansible-playcluster.git
+  ```
+
+- Go to the `software` folder within the cloned repository.
+
+  ```shell
+  $ cd ./ansible-playcluster/software/
   ```
 
 - Create an SSH key file. :key:
 
   ```shell
-  ssh-keygen -t ed25519 -c "ansible workstation key"
+  $ ssh-keygen -t ed25519 -C "ansible workstation key"
   ```
 
 - Get needed roles for this playbook.
 
   ```shell
-  ansible-galaxy install --roles-path ./roles -r requirements.yml
-  ```
+  $ ansible-galaxy install --roles-path ./roles -r requirements.yaml
 
-- Move the software directory.
-
-  ```shell
-  cd software/
+  Starting galaxy role install process
+  - downloading role 'k3s', owned by xanmanning
+  - downloading role from https://github.com/PyratLabs/ansible-role-k3s/archive/v1.16.0.tar.gz
+  - extracting xanmanning.k3s to /home/yeyeto2788/workspace/ansible-playcluster/software/roles/xanmanning.k3s
+  - xanmanning.k3s (v1.16.0) was installed successfully
   ```
 
 - Edit the variables on the `vars/setup_variables.yaml` file.
@@ -66,13 +72,13 @@ In order to use ansible and follow the steps on this short guide you need to set
 - Check that it works as expected. :warning:
 
   ```shell
-  ansible-playbook main.yaml -kK --check
+  $ ansible-playbook main.yaml -kK --check
   ```
 
 - Execute the playbook. :heavy_check_mark:
 
   ```shell
-  ansible-playbook main.yaml -kK
+  $ ansible-playbook main.yaml -kK
   ```
 
 ## Tips: :penguin:

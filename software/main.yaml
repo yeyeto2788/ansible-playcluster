@@ -26,18 +26,11 @@
         cache_valid_time: 3600
       changed_when: false
 
-    - name: Perform a check for SSH file existance for the following task
-      local_action:
-        stat:
-          path: "{{ ssh_key_directory }}"
-      register: file
-
     - name: Add SSH key
       ansible.posix.authorized_key:
         user: "{{ ssh_user }}"
         state: present
-        key: "{{ lookup('file', {{ ssh_key_directory }}) }}"
-      when: file.stat.exists
+        key: "{{ lookup('file', ssh_key_directory ) }}"
 
   tasks:
     - name: Install needed packages
@@ -57,33 +50,26 @@
         url: https://get.docker.com/
         dest: /tmp/get-docker.sh
         mode: 0775
-      when: docker_command_result.rc == 1
+      when: docker_command_result.rc == true
 
     - name: Run Docker install convenience script
       command: /tmp/get-docker.sh
       environment:
         CHANNEL: stable
-      when: docker_command_result.rc == 1
-
+      when: docker_command_result.rc == true
+      
     - name: Ensure Docker is started.
       service:
         name: docker
         state: started
         enabled: true
 
-    - name: Install Docker Compose
-      get_url:
-        url: "https://github.com/docker/compose/releases/download/{{ docker_compose_version }}/docker-compose-{{ ansible_system }}-{{ ansible_architecture }}"
-        dest: /usr/local/bin/docker-compose
-        mode: a+x
-      when: install_docker_compose == 1
-
   post_tasks:
     - name: Clean system packages
       apt:
         autoclean: true
         autoremove: true
-
+    
     - name: restart docker
       service:
         name: docker
@@ -94,17 +80,30 @@
   hosts: master_node
   vars_files:
     - ./vars/setup_variables.yaml
+
   pre_tasks:
     - name: Set machine as the control node
       set_fact:
         k3s_control_node: true
-  roles: xanmanning.k3s 
-  when: install_k3s == 1
+        k3s_become_for_all: true
+
+  roles: 
+    - xanmanning.k3s 
+  ignore_errors: yes
 
 - name: Setup the worker nodes.
   become: true
   hosts: worker_nodes
   vars_files:
     - ./vars/setup_variables.yaml
-  roles: xanmanning.k3s 
-  when: install_k3s == 1
+
+  pre_tasks:
+    - name: Set variables for the worker node
+      set_fact:
+        k3s_become_for_all: true
+        k3s_control_token: 
+
+  roles: 
+    - xanmanning.k3s
+  
+  ignore_errors: yes
