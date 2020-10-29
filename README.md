@@ -2,7 +2,7 @@
 
 <!-- Project images -->
 <div align=center>
-<img src="./docs/images/cluster_front.jpeg" height="400"/>
+<img src="./docs/images/cluster_front.jpeg" style="height:400;border-radius: 2%"/>
 
 > ansible, ansible-playbook cluster using 3D printed structure.
 
