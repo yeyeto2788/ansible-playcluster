@@ -1,12 +1,14 @@
 # Ansible PlayCluster
 
 <!-- Project images -->
+<div align=center>
+<img src="./docs/images/cluster_front.jpeg" height="400"/>
 
-<img src="" width="500"/>
-<qoute>
-ansible, ansible-playbook cluster using 3D printed structure.
-</qoute> 
+> ansible, ansible-playbook cluster using 3D printed structure.
+
 :computer: :computer: :computer:
+
+</div>
 
 ---
 
@@ -115,3 +117,4 @@ The following items are the ones I used for this build. For more info on the har
 
 - I used [this](https://eu.dlink.com/uk/en/products/go-sw-5e) network switch which is unmanaged but I guess you can use any switch you like as long as it has enough ports for you boards.
 - I decided to go with 3mm screws since where the ones I had.
+- I bought a 5mm screw rod and cut it since I couldn't find long screws.
