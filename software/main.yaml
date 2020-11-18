@@ -63,7 +63,12 @@
         name: docker
         state: started
         enabled: true
-
+    
+    - name: Install docker-compose through pip
+      pip:
+        name: docker-compose
+        executable: pip3
+        
   post_tasks:
     - name: Clean system packages
       apt:
@@ -101,7 +106,6 @@
     - name: Set variables for the worker node
       set_fact:
         k3s_become_for_all: true
-        k3s_control_token: 
 
   roles: 
     - xanmanning.k3s
